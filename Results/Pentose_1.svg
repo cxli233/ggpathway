@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='468.00pt' height='144.00pt' viewBox='0 0 468.00 144.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw0NjguMDB8MC4wMHwxNDQuMDA='>
+    <rect x='0.00' y='0.00' width='468.00' height='144.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw0NjguMDB8MC4wMHwxNDQuMDA=)'>
+<text x='21.27' y='75.95' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='30.04px' lengthAdjust='spacingAndGlyphs'>Glc6P</text>
+<text x='163.09' y='75.95' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='91.37px' lengthAdjust='spacingAndGlyphs'>6P-gluconolactone</text>
+<text x='304.91' y='75.95' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='76.65px' lengthAdjust='spacingAndGlyphs'>6P-glucoconate</text>
+<text x='446.73' y='75.95' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='27.59px' lengthAdjust='spacingAndGlyphs'>Ru5P</text>
+<polyline points='78.87,72.00 80.01,72.00 81.44,72.00 82.87,72.00 84.30,72.00 85.74,72.00 87.17,72.00 88.60,72.00 90.03,72.00 91.47,72.00 92.90,72.00 94.33,72.00 95.76,72.00 97.20,72.00 98.63,72.00 100.06,72.00 101.49,72.00 102.93,72.00 104.36,72.00 105.49,72.00 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<polyline points='99.26,75.60 105.49,72.00 99.26,68.40 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<polyline points='220.69,72.00 221.82,72.00 223.26,72.00 224.69,72.00 226.12,72.00 227.55,72.00 228.99,72.00 230.42,72.00 231.85,72.00 233.28,72.00 234.72,72.00 236.15,72.00 237.58,72.00 239.01,72.00 240.45,72.00 241.88,72.00 243.31,72.00 244.74,72.00 246.18,72.00 247.31,72.00 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<polyline points='241.07,75.60 247.31,72.00 241.07,68.40 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<polyline points='362.51,72.00 363.64,72.00 365.07,72.00 366.51,72.00 367.94,72.00 369.37,72.00 370.80,72.00 372.24,72.00 373.67,72.00 375.10,72.00 376.53,72.00 377.97,72.00 379.40,72.00 380.83,72.00 382.26,72.00 383.70,72.00 385.13,72.00 386.56,72.00 387.99,72.00 389.13,72.00 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<polyline points='382.89,75.60 389.13,72.00 382.89,68.40 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<text x='92.90' y='49.45' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='45.96px' lengthAdjust='spacingAndGlyphs'>Glc6PHD</text>
+<text x='234.72' y='49.45' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='103.02px' lengthAdjust='spacingAndGlyphs'>6P-gluconolactonase</text>
+<text x='376.53' y='49.45' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='80.93px' lengthAdjust='spacingAndGlyphs'>6P-gluconateDH</text>
+</g>
+</svg>
