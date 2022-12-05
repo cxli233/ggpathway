@@ -7,13 +7,13 @@ A tutorial for pathway visualization using tidyverse, igraph, and ggraph.
 
 # Table of contents
 
-1. Introduction
-     - Dependencies
-     - The theory behind this workflow
-     - Required input
-2. Example 1: simple linear pathway 
-3. Example 2: more complex pathway
-4. Example 3: circular pathway 
+1. [Introduction](https://github.com/cxli233/ggpathway#introduction)
+     - [Dependencies](https://github.com/cxli233/ggpathway#dependencies)
+     - [The theory behind this workflow](https://github.com/cxli233/ggpathway#the-theory-behind-this-workflow)
+     - [Required input](https://github.com/cxli233/ggpathway#required-input)
+2. [Example 1: simple linear pathway](https://github.com/cxli233/ggpathway#example-1-simple-linear-pathway) 
+3. [Example 2: more complex pathway](https://github.com/cxli233/ggpathway#example-2-more-complex-pathway)
+4. [Example 3: circular pathway](https://github.com/cxli233/ggpathway#example-3-circular-pathway) 
 
 # Introduction 
 
@@ -170,7 +170,7 @@ head(example2_edges)
 head(example2_nodes)
 ```
 
-**Important** If a compound appears multiple times in the pathway at different locations, each instance *must* have a different name. 
+**Important!** If a compound appears multiple times in the pathway at different locations, each instance *must* have a different name. 
 
 In this example, Xu5P, Glyceral-3P, and Frc-6P all appear twice. 
 So I named them {name}_{1} or {name}_{2}. 
