@@ -57,20 +57,20 @@ For example, we want to visualize a metabolic pathway.
 In this context, each metabolite is a node; each enzyme is an edge that connects the metabolites.
 This concept can be applied to signaling pathways as well, with modifications. 
 
-We will `tidyverse` functions handle tabular data operations regarding the edge and node tables.
+We will use `tidyverse` functions to handle tabular data operations regarding the edge and node tables.
 We will then use `igraph` functions to produce a network object from edge and node tables. 
 Finally, we will use `ggraph`, a `ggplot` extension of `igraph` to make pretty plots. 
 
 ## Required input
 
 * Edge table - each row is an edge, with the following columns: 
-     - from: where the edge starts, e.g., name of metabolite (required).
-     - to: where the edge ends, e.g., name of metabolite (required).
+     - from: where the edge starts, e.g., name of metabolite (**required**).
+     - to: where the edge ends, e.g., name of metabolite (**required**).
      - label: if you want the edge to be labeled, e.g., name of the enzyme.
      - other information as different columns, e.g., condition, tissue, cell types... 
 
 * Node table - each row is a node, with the following columns: 
-     - name: name of the node, e.g., name of the metabolite (required).
+     - name: name of the node, e.g., name of the metabolite (**required**).
      - x: x coordinate of the node on the graph.
      - y: y coordinate of the node on the graph.
      - other information as different columns, e.g., molecular weight, localization... 
@@ -155,7 +155,7 @@ Not very sophisticated, but now we have the frame work to build more complex pat
 # Example 2: more complex pathway
 
 For the 2nd example, let's do a more complex pathway.
-My more complex I mean more edges and more nodes, as well as branching pathway. 
+By more complex I mean more edges and more nodes, as well as branches. 
 We will use the rest of the pentose phosphate pathway. 
 
 Once the pathway gets complex enough, it's better to prepare edge & node tables in Excel. 
@@ -172,7 +172,7 @@ head(example2_nodes)
 **Important!** If a compound appears multiple times in the pathway at different locations, each instance *must* have a different name. 
 
 In this example, Xu5P, Glyceral-3P, and Frc-6P all appear twice. 
-So I named them {name}_{1} or {name}_{2}. 
+So I named them {name}{1} or {name}{2}. 
 For aesthetic purposes, we can make a new column in the node table called "label",
 such that different nodes can have the same label, but they must have unique names. 
 
@@ -194,7 +194,7 @@ example2_network <- graph_from_data_frame(
 ```
 
 For a complex pathway with multiple branch points, instead of manual layout, we can also use the layout methods provides by `igraph` and `ggraph`. 
-Read more [here](https://www.data-imaginist.com/2017/ggraph-introduction-layouts/).
+Read more about layouts [here](https://www.data-imaginist.com/2017/ggraph-introduction-layouts/).
 
 ```r
 ggraph(example2_network, layout = "kk") +
@@ -218,7 +218,7 @@ ggsave("../Results/Pentose_2.png", height = 5, width = 4, bg = "white")
 
 That looks fine to me. 
 I turned off the edge labels, because it's too much text to look at. 
-We can incorporate other info on the graph, such as number of carbons each metabolites have. 
+We can incorporate other info on the graph, such as number of carbons each metabolite has. 
 A purpose of the pentose phosphate pathway is to toggle between 6 or 3 carbon molecules for glycolysis and 5 carbon molecules for nucleotide biosynthesis. 
 
 
@@ -279,7 +279,7 @@ ggsave("../Results/TCA_1.png", height = 4, width = 5, bg = "white")
 ![TCA1](https://github.com/cxli233/ggpathway/blob/main/Results/TCA_1.svg)
 
 This looks fine to me. 
-I had to play around with the line size. 
+I had to play around with the line and arrow size. 
 Maybe I was too ambitious to put all the cofactors on this. 
 
 ## Subsetting nodes and edges 
