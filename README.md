@@ -1,7 +1,6 @@
 # ggpathway
 A tutorial for pathway visualization using tidyverse, igraph, and ggraph. 
 
-![OPPP_2](https://github.com/cxli233/ggpathway/blob/main/Results/Pentose_2.svg)
 ![Krebs cycle](https://github.com/cxli233/ggpathway/blob/main/Results/TCA_2.svg) 
 
 
