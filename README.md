@@ -4,6 +4,10 @@ A tutorial for pathway visualization using tidyverse, igraph, and ggraph.
 ![Krebs cycle](https://github.com/cxli233/ggpathway/blob/main/Results/TCA_2.svg) 
 
 
+
+[![DOI](https://zenodo.org/badge/574269912.svg)](https://zenodo.org/badge/latestdoi/574269912)
+
+
 # Table of contents
 
 1. [Introduction](https://github.com/cxli233/ggpathway#introduction)
