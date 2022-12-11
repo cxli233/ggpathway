@@ -17,6 +17,8 @@ A tutorial for pathway visualization using tidyverse, igraph, and ggraph.
 2. [Example 1: simple linear pathway](https://github.com/cxli233/ggpathway#example-1-simple-linear-pathway) 
 3. [Example 2: more complex pathway](https://github.com/cxli233/ggpathway#example-2-more-complex-pathway)
 4. [Example 3: circular pathway](https://github.com/cxli233/ggpathway#example-3-circular-pathway) 
+5. [Subsetting pathway](https://github.com/cxli233/ggpathway#subsetting-pathway)
+6. [Combinding pathways](https://github.com/cxli233/ggpathway#combining-pathways)
 
 # Introduction 
 
@@ -286,9 +288,9 @@ This looks fine to me.
 I had to play around with the line and arrow size. 
 Maybe I was too ambitious to put all the cofactors on this. 
 
-## Subsetting nodes and edges 
+# Subsetting pathway
 
-We can simplify this by removing the cofactors.
+We can subset a pathway by removing nodes and edges. 
 ```r
 example3_nodes_trim <- example3_nodes %>% 
   filter(carbons != "cofactor")
@@ -331,3 +333,72 @@ ggsave("../Results/TCA_2.png", height = 4, width = 5, bg = "white")
  
 That's it! 
 
+# Combining pathways
+When we need to combine two pathways, the new edge and node tables are the unions of edges and nodes, respectively. 
+This can be achieved by binding the tables as rows and then removing redundant rows using `distinct(..., .keep.all = T)` .
+
+First read in data.
+```r
+calvin_edges <- read_excel("../Data/Calvin_cycle_edges.xlsx")
+calvin_nodes <- read_excel("../Data/Calvin_cycle_nodes.xlsx")
+
+PR_edges <- read_excel("../Data/Photorespiration_edges.xlsx")
+PR_nodes <- read_excel("../Data/Photorespiration_nodes.xlsx")
+```
+
+Then combine edges and remove redundant ones.
+```r
+combined_edges <- rbind(
+  calvin_edges, 
+  PR_edges
+) %>% 
+  distinct(from, to, .keep_all = T)
+```
+
+Then combine nodes and remove redundant ones.
+```r
+combined_nodes <- rbind(
+  calvin_nodes %>% 
+    select(-carbon),
+  PR_nodes
+) %>% 
+  distinct( .keep_all = T)
+```
+
+Then make graph object. 
+```r
+combined_network <- graph_from_data_frame(
+  d = combined_edges,
+  vertices = combined_nodes,
+  directed = T
+)
+```
+
+Finally, plot! 
+```r
+ggraph(combined_network, layout = "kk") +
+  geom_node_point(size = 3, aes(fill = localization), 
+                  alpha = 0.8, shape = 21, color = "grey70") +
+  geom_edge_link(label_dodge = unit(2, 'lines'),
+                   arrow = arrow(length = unit(0.4, 'lines')), 
+                   start_cap = circle(0.75, 'lines'),
+                   end_cap = circle(0.75, 'lines'),
+                 alpha = 0.5, width = 1.1, color = "grey30") +
+  geom_node_text(aes(label = name), hjust = 0.5, repel = T) +
+  scale_fill_manual(values = carto_pal(7, "Vivid")[c(4, 2, 5)],
+                    limits = c("chloroplast", "peroxisome", "mitochondria")) +
+  labs(fill = "Localization",
+       title = "Calvin cycle & photorespiration") +
+  theme_void() +
+  theme(
+    legend.position = c(0.8, 0.2)
+  ) +
+  scale_y_reverse()
+
+ggsave("../Results/Calvin_PS_comb.svg", height = 4.5, width = 5.5, bg = "white")
+ggsave("../Results/Calvin_PS_comb.png", height = 4.5, width = 5.5, bg = "white")
+```
+
+![combined_pathway](https://github.com/cxli233/ggpathway/blob/main/Results/Calvin_PS_comb.svg) 
+
+Done! 
