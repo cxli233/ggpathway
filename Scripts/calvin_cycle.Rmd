@@ -1,0 +1,163 @@
+---
+title: "calvin_cycle"
+author: "Chenxin Li"
+date: "2022-12-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+ 
+# Dependencies
+```{r}
+library(tidyverse)
+library(igraph)
+library(ggraph)
+
+library(readxl)
+
+library(viridis)
+library(RColorBrewer)
+library(rcartocolor)
+```
+# Calvin cycle
+```{r}
+calvin_edges <- read_excel("../Data/Calvin_cycle_edges.xlsx")
+calvin_nodes <- read_excel("../Data/Calvin_cycle_nodes.xlsx")
+
+head(calvin_edges)
+head(calvin_nodes)
+```
+```{r}
+calvin_network <- graph_from_data_frame(
+  d = calvin_edges,
+  vertices = calvin_nodes,
+  directed = T
+)
+```
+
+```{r}
+ggraph(calvin_network, layout = "kk") +
+  geom_node_point(size = 3, aes(fill = as.factor(carbon)), 
+                  alpha = 0.8, shape = 21, color = "grey20") +
+  geom_edge_link(label_dodge = unit(2, 'lines'),
+                   arrow = arrow(length = unit(0.4, 'lines')), 
+                   start_cap = circle(1, 'lines'),
+                   end_cap = circle(2, 'lines'),
+                 alpha = 0.5, width = 1.1, color = "grey30") +
+  geom_node_text(aes(label = name), hjust = 0.5, repel = T) +
+  scale_fill_manual(values = carto_pal(7, "Vivid")) +
+  labs(fill = "Carbons",
+       title = "Calvin Cycle") +
+  theme_void() +
+  theme(
+    legend.position = "bottom"
+  ) +
+  scale_x_reverse()
+
+ggsave("../Results/calvin_cycle.svg", height = 4, width = 6, bg = "white")
+ggsave("../Results/calvin_cycle.png", height = 4, width = 6, bg = "white")
+```
+
+# Photorespiration
+```{r}
+PR_edges <- read_excel("../Data/Photorespiration_edges.xlsx")
+PR_nodes <- read_excel("../Data/Photorespiration_nodes.xlsx")
+
+head(PR_edges)
+head(PR_nodes)
+```
+
+```{r}
+PR_network <- graph_from_data_frame(
+  d = PR_edges,
+  vertices = PR_nodes,
+  directed = T
+)
+```
+
+```{r}
+ggraph(PR_network, layout = "kk") +
+  geom_node_point(size = 3, aes(fill = localization), 
+                  alpha = 0.8, shape = 21, color = "grey70") +
+  geom_edge_link(label_dodge = unit(2, 'lines'),
+                   arrow = arrow(length = unit(0.4, 'lines')), 
+                   start_cap = circle(1, 'lines'),
+                   end_cap = circle(2, 'lines'),
+                 alpha = 0.5, width = 1.1, color = "grey30") +
+  geom_node_text(aes(label = name), hjust = 0.5, repel = T) +
+  scale_fill_manual(values = carto_pal(7, "Vivid")[c(4, 2, 5)],
+                    limits = c("chloroplast", "peroxisome", "mitochondria")) +
+  labs(fill = "Localization",
+       title = "Photorespiration") +
+  theme_void() +
+  theme(
+    legend.position = "right"
+  ) +
+  scale_x_reverse()
+
+ggsave("../Results/Photoresp.svg", height = 3, width = 5, bg = "white")
+ggsave("../Results/Photoresp.png", height = 3, width = 5, bg = "white")
+```
+
+# Combining pathways 
+When we need to combine two pathways, the new edge and node tables are the unions of edges and nodes. 
+
+This can be achieved by binding the tables as rows and then removing redundant rows using `distinct(..., .keep.all = T)` 
+
+
+```{r}
+combined_edges <- rbind(
+  calvin_edges, 
+  PR_edges
+) %>% 
+  distinct(from, to, .keep_all = T)
+
+head(combined_edges)
+```
+
+```{r}
+combined_nodes <- rbind(
+  calvin_nodes %>% 
+    select(-carbon),
+  PR_nodes
+) %>% 
+  distinct( .keep_all = T)
+
+head(combined_nodes)
+```
+
+```{r}
+combined_network <- graph_from_data_frame(
+  d = combined_edges,
+  vertices = combined_nodes,
+  directed = T
+)
+```
+
+```{r}
+ggraph(combined_network, layout = "kk") +
+  geom_node_point(size = 3, aes(fill = localization), 
+                  alpha = 0.8, shape = 21, color = "grey70") +
+  geom_edge_link(label_dodge = unit(2, 'lines'),
+                   arrow = arrow(length = unit(0.4, 'lines')), 
+                   start_cap = circle(0.75, 'lines'),
+                   end_cap = circle(0.75, 'lines'),
+                 alpha = 0.5, width = 1.1, color = "grey30") +
+  geom_node_text(aes(label = name), hjust = 0.5, repel = T) +
+  scale_fill_manual(values = carto_pal(7, "Vivid")[c(4, 2, 5)],
+                    limits = c("chloroplast", "peroxisome", "mitochondria")) +
+  labs(fill = "Localization",
+       title = "Calvin cycle & photorespiration") +
+  theme_void() +
+  theme(
+    legend.position = c(0.8, 0.2)
+  ) +
+  scale_y_reverse()
+
+ggsave("../Results/Calvin_PS_comb.svg", height = 4.5, width = 5.5, bg = "white")
+ggsave("../Results/Calvin_PS_comb.png", height = 4.5, width = 5.5, bg = "white")
+```
+
