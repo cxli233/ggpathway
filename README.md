@@ -3,8 +3,6 @@ A tutorial for pathway visualization using tidyverse, igraph, and ggraph.
 
 ![Krebs cycle](https://github.com/cxli233/ggpathway/blob/main/Results/TCA_2.svg) 
 
-
-
 [![DOI](https://zenodo.org/badge/574269912.svg)](https://zenodo.org/badge/latestdoi/574269912)
 
 
@@ -401,4 +399,5 @@ ggsave("../Results/Calvin_PS_comb.png", height = 4.5, width = 5.5, bg = "white")
 
 ![combined_pathway](https://github.com/cxli233/ggpathway/blob/main/Results/Calvin_PS_comb.svg) 
 
-Done! 
+Done!
+Example script on Calvin cycle, photorespiration, and combined can be found [here](https://github.com/cxli233/ggpathway/blob/main/Scripts/calvin_cycle.Rmd). 
