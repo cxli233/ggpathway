@@ -1,0 +1,93 @@
+---
+title: "Pipeline"
+author: "Chenxin Li"
+date: "2023-04-01"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Package
+```{r}
+library(tidyverse)
+library(readxl)
+library(igraph)
+library(ggraph)
+library(RColorBrewer)
+library(viridis)
+library(rcartocolor)
+```
+
+# Data
+```{r}
+edge_table <- read_excel("../Data/Multi-ome_edges.xlsx")
+node_table <- read_excel("../Data/Multi-ome_nodes.xlsx")
+
+head(edge_table)
+head(node_table)
+```
+## Reorder levels in node table
+```{r}
+node_table <- node_table %>% 
+  mutate(Type = factor(Type, levels = c(
+    "Input", "Upstream", "Intermediate", "R.Data", "Downstream"
+  ))) %>% 
+  mutate(txt.col = case_when(
+    Type == "Input" |
+      Type == "Upstream" |
+      Type == "Intermediate"  ~ "White",
+    T ~ "Black"
+  ))
+```
+
+
+## Check if nodes match edge terminals 
+```{r}
+setdiff(
+  unique(c(edge_table$From, edge_table$To)),
+  node_table$Name
+)
+```
+
+
+# Make network object 
+```{r}
+my_pipeline <- graph_from_data_frame(d = edge_table, 
+                                     vertices = node_table, 
+                                     directed = T)
+```
+
+
+# Graph pipeline as network
+```{r}
+my_pipeline %>% 
+  ggraph(
+    layout = "tree"
+    ) +
+  geom_edge_link(
+    arrow = arrow(length = unit(0.4, 'lines')), 
+    start_cap = circle(1.5, 'lines'),
+    end_cap = circle(1.5, 'lines'),
+    width = 1.2, alpha = 0.6, color = "grey30"
+  ) +
+  geom_node_point(aes(fill = Type, color = txt.col),
+                 size = 3, shape = 21, alpha = 0.8) +
+  geom_node_text(aes(label = name), alpha = 0.8, repel = T,
+                 size = 4) +
+  scale_fill_manual(values = viridis(5),
+                     limits = c(
+                        "Input", "Upstream", "Intermediate", "R.Data", "Downstream"
+                     )) +
+  scale_color_identity() +
+  labs(fill = NULL) +
+  theme_void() +
+  theme(
+    legend.position = c(0.8, 0.2)
+  ) 
+
+ggsave("../Results/Pipeline.svg", height = 6, width = 5, bg = "white")
+ggsave("../Results/Pipeline.png", height = 6, width = 5, bg = "white")
+```
+
