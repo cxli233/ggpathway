@@ -17,9 +17,9 @@ A tutorial for pathway visualization using tidyverse, igraph, and ggraph.
 4. [Example 3: circular pathway](https://github.com/cxli233/ggpathway#example-3-circular-pathway) 
 5. [Subsetting pathway](https://github.com/cxli233/ggpathway#subsetting-pathway)
 6. [Combinding pathways](https://github.com/cxli233/ggpathway#combining-pathways)
-7. [Other examples]()
-        - [Pipeline/workflow visualized as network]()
-        - [Signaling pathway with inhibitory edges]()
+7. [Other examples](https://github.com/cxli233/ggpathway/blob/main/README.md#other-examples)
+        - [Pipeline/workflow visualized as network](https://github.com/cxli233/ggpathway/blob/main/README.md#other-examples)
+        - [Signaling pathway with inhibitory edges](https://github.com/cxli233/ggpathway/blob/main/README.md#other-examples)
 
 # Introduction 
 
