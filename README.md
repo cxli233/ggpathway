@@ -18,8 +18,8 @@ A tutorial for pathway visualization using tidyverse, igraph, and ggraph.
 5. [Subsetting pathway](https://github.com/cxli233/ggpathway#subsetting-pathway)
 6. [Combinding pathways](https://github.com/cxli233/ggpathway#combining-pathways)
 7. [Other examples](https://github.com/cxli233/ggpathway#other-examples)
-   - [Pipeline/workflow visualized as network](https://github.com/cxli233/ggpathway#other-examples)
-   - [Signaling pathway with inhibitory edges](https://github.com/cxli233/ggpathway#other-examples)
+   - [Pipeline/workflow visualized as network](https://github.com/cxli233/ggpathway#pipelineworkflow-visualized-as-network)
+   - [Signaling pathway with inhibitory edges](https://github.com/cxli233/ggpathway#signaling-pathway-with-inhibitory-edges)
 
 # Introduction 
 
