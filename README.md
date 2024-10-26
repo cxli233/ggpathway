@@ -17,6 +17,9 @@ A tutorial for pathway visualization using tidyverse, igraph, and ggraph.
 4. [Example 3: circular pathway](https://github.com/cxli233/ggpathway#example-3-circular-pathway) 
 5. [Subsetting pathway](https://github.com/cxli233/ggpathway#subsetting-pathway)
 6. [Combinding pathways](https://github.com/cxli233/ggpathway#combining-pathways)
+7. [Other examples]()
+        - [Pipeline/workflow visualized as network]()
+        - [Signaling pathway with inhibitory edges]()
 
 # Introduction 
 
@@ -401,3 +404,18 @@ ggsave("../Results/Calvin_PS_comb.png", height = 4.5, width = 5.5, bg = "white")
 
 Done!
 Example script on Calvin cycle, photorespiration, and combined can be found [here](https://github.com/cxli233/ggpathway/blob/main/Scripts/calvin_cycle.Rmd). 
+
+# Other examples
+## Pipeline/workflow visualized as network
+Pipelines and workflows can be visualized as a network using ggraph. 
+
+![Example pipeline](https://github.com/cxli233/ggpathway/blob/main/Results/Pipeline.png)
+
+Example script for this pipeline visualization can be found [here](https://github.com/cxli233/ggpathway/blob/main/Scripts/Pipeline_graph.Rmd). 
+
+## Signaling pathway with inhibitory edges
+Signaling pathway with inhibitory edges requires additional customization, as activating and repressive interactions require distinct edge shapes. Activating interactions are usually represented by arrows (`->`), and repressive interactions are usually represented by bars (`-|`). We can use the [ggarrow](https://github.com/teunbrand/ggarrow) package to customize arrow shapes. However, it requires additional tinkering, and for small pathways, I am not sure this is more effective than making the diagram in powerpoint. Here is an example:  
+
+![Ethylene signaling pathway](https://github.com/cxli233/ggpathway/blob/main/Results/Ethylene_Signaling_pathway.png) 
+
+Example script for this signaling pathway visualization can be found [here](https://github.com/cxli233/ggpathway/blob/main/Scripts/Inhibitory_edges.Rmd). 
